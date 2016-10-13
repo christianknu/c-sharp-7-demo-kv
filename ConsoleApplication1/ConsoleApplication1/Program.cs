@@ -36,6 +36,14 @@ namespace CSharp7DemoKV
             WriteLine("---- Step 6 ----");
             step6.Run();
             WriteLine("\n");
+
+            WriteLine("---- Step 7 ----");
+            step7.Run();
+            WriteLine("\n");
+
+            WriteLine("---- Step 8 ----");
+            step8.Run();
+            WriteLine("\n");
         }
     }
 
