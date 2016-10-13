@@ -173,10 +173,44 @@ namespace CSharp7DemoKV
             var r = (s: 0, c: 0);
             foreach(var v in numbers)
             {
-                // Patterns: Checking type and assigning value to variable
+                // Pattern matching: Checking type and assigning value to variable
+                // If it is an int, I can extract the value
                 if (v is int i)
                 {
                     Add(i, 1);
+                }
+            }
+            return r;
+            void Add(int s, int c) { r = (r.s + s, r.c + c); }
+        }
+    }
+
+    static class step8
+    {
+        public static void Run()
+        {
+            // Making number an array of objects
+            object[] numbers = { 0b1, 0b10, new object[] { 0b100, 0b1000, 0b1_0000 }, null, 0b10_0000 };
+
+            var (sum, count) = Tally(numbers);
+            WriteLine($"sum: {sum}, count: {count}");
+        }
+
+        private static (int sum, int count) Tally(object[] numbers)
+        {
+            var r = (s: 0, c: 0);
+            foreach (var v in numbers)
+            {
+                // Pattern matching in switch
+                switch(v)
+                {
+                    case int i:
+                        Add(i, 1);
+                        break;
+                    case object[] a when a.Length > 0:
+                        var t = Tally(a);
+                        Add(t.sum, t.count);
+                        break;
                 }
             }
             return r;
